@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List - Baai Mart Wholesale</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Baai <span style="color: rgb(251, 169, 18);">Mart</span></h1>
+        <input type="text" id="search-bar" onkeyup="filterProducts()" placeholder="Search for products...">
+    </header>
+
+    <div id="product-container"></div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Order Confirmation</h2>
+            <label for="shop-name">Shop Name:</label>
+            <input type="text" id="shop-name" placeholder="Enter your shop name" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" placeholder="Enter your address" required>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1" required>
+            <p id="quantity-error" class="error" style="display: none; color: red;"></p>
+            <button id="submitOrder">Submit Order</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Baai Mart. All Rights Reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Main product detail container */
+.product-details-container {
+    display: flex;
+    flex-direction: column; /* Change to row for wider screens */
+    max-width: 1200px; /* Increased max width for larger displays */
+    margin: 40px auto; /* Increased margin for better spacing */
+    padding: 30px; /* Increased padding for a spacious feel */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+    .product-details-container {
+        flex-direction: row; /* Row layout for desktop */
+    }
+
+    .product-image {
+        flex: 1; /* Allow the image section to take more space */
+        padding-right: 20px; /* Space between image and text */
+    }
+
+    .product-info {
+        flex: 2; /* Allow the text section to take more space */
+    }
+}
+
+/* Product image styling */
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ddd; /* Subtle border for image */
+}
+
+/* Product info section */
+.product-info {
+    text-align: left; /* Align text to the left for better readability */
+    padding: 20px;
+}
+
+.product-info h2 {
+    margin: 10px 0;
+    font-size: 2em; /* Larger font for product name */
+    color: #333;
+}
+
+.price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #4CAF50; /* Green color for price */
+}
+
+.description {
+    margin: 15px 0;
+    font-size: 1em; /* Slightly larger font size */
+    line-height: 1.5; /* Improve line spacing */
+}
+
+/* Stock availability */
+.in-stock {
+    color: green;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Add to cart button styling */
+.add-to-cart {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 20px; /* Increased padding for better touch area */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1.1em; /* Slightly larger font for button */
+}
+
+.add-to-cart:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 20px; /* Add margin to separate from content */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .product-details-container {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .price {
+        font-size: 1.3em; /* Responsive price font size */
+    }
+
+    .add-to-cart {
+        padding: 10px 15px; /* Adjust button padding for smaller screens */
+    }
+}
+/* Checkout Modal Styles */
+#checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dim background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* On top of other content */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 400px; /* Set a width for the modal */
+    position: relative; /* Allow positioning of the close button */
+}
+
+.modal-content h2 {
+    margin: 0 0 15px 0; /* Add margin below the title */
+    font-size: 24px; /* Increase font size */
+    color: #333; /* Darker text for better readability */
+}
+
+.modal-content input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase font size */
+}
+
+.modal-content button {
+    background-color: #007bff; /* Primary button color */
+    color: #fff; /* White text color */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.modal-content button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+#closeModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px; /* Larger close button */
+    color: #aaa; /* Gray color */
+    cursor: pointer;
+}
+
+#closeModal:hover {
+    color: #000; /* Darker on hover */
+}
+
+#quantity-error {
+    color: red; /* Red color for error messages */
+    font-size: 14px; /* Smaller font size for error messages */
+}
+/* General button styles */
+.buy-whatsapp-btn{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}

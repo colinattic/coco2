@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="product-details.css">
+</head>
+<body>
+    <header>
+        <h1>Product Details</h1>
+    </header>
+
+    <div class="product-details-container" id="product-details-container">
+        <!-- Product details will be populated here -->
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal" style="cursor: pointer;">&times;</span>
+            <h2>Checkout</h2>
+            <input type="text" id="shop-name" placeholder="Your Shop Name" required>
+            <input type="text" id="address" placeholder="Your Address" required>
+            <input type="number" id="quantity" placeholder="Quantity" required oninput="updateTotalPrice()">
+            <p id="total-price">Total Price: LKR 0</p> <!-- Total price display -->
+            <p id="quantity-error" style="display: none; color: red;"></p>
+            <button id="submitOrder">Submit Order</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Baai Mart. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let currentProductPrice; // Declare a global variable for the current product price
+
+        async function loadProductDetails() {
+            // Get the product ID from the URL
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id'); // Get 'id' from URL
+
+            // Fetch the products data from the JSON file
+            try {
+                const response = await fetch('products.json'); // Update the path to your actual JSON file
+                const products = await response.json();
+
+                // Find the product with the corresponding ID
+                const product = products.find(p => p.id == productId); // Adjusting for array structure
+                if (product) {
+                    const container = document.getElementById('product-details-container');
+                    container.innerHTML = `
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h2>${product.name}</h2>
+                            <p class="price">Price: රු ${product.price}</p>
+                            <p class="description">Description: ${product.description}</p>
+                            <p class="in-stock">In Stock: ${product.stock > 0 ? product.stock : 'Out of Stock'}</p>
+                            <p class="minimum-order">Minimum Order: ${product.minOrder}</p>
+                            <button class="buy-whatsapp-btn" onclick="openCheckoutModal('${product.name}', ${product.price}, ${product.stock}, ${product.minOrder})">Order WhatsApp</button>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('product-details-container').innerHTML = '<p>Product not found.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading product data:', error);
+                document.getElementById('product-details-container').innerHTML = '<p>Error loading product details.</p>';
+            }
+        }
+
+        // Function to open the checkout modal
+        function openCheckoutModal(productName, productPrice, productStock, minOrder) {
+            document.getElementById('checkout-modal').style.display = 'block';
+            document.getElementById('submitOrder').onclick = () => submitOrder(productName, productPrice, productStock, minOrder);
+            document.getElementById('quantity').value = ''; // Reset quantity input
+            currentProductPrice = productPrice; // Store the product price in the global variable
+            updateTotalPrice(); // Update total price to initial value (0)
+        }
+
+        // Function to update the total price based on quantity
+        function updateTotalPrice() {
+            const quantityInput = document.getElementById('quantity');
+            const totalPriceElement = document.getElementById('total-price');
+            const quantity = parseInt(quantityInput.value); // Parse the input value as an integer
+
+            // Debugging log to check the value of quantity
+            console.log('Quantity:', quantity);
+
+            // Calculate total price only if quantity is a valid number
+            if (!isNaN(quantity) && quantity >= 0) {
+                const totalPrice = currentProductPrice * quantity; // Calculate total price
+                totalPriceElement.innerText = `Total Price: LKR ${totalPrice}`; // Update the total price display
+            } else {
+                totalPriceElement.innerText = `Total Price: LKR 0`; // Reset total price if quantity is invalid
+            }
+        }
+
+        // Function to close the checkout modal
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        // Event listener for closing the modal
+        document.getElementById('closeModal').onclick = closeCheckoutModal;
+
+        // Function to submit the order
+        function submitOrder(productName, productPrice, productStock, minOrder) {
+            const shopName = document.getElementById('shop-name').value;
+            const address = document.getElementById('address').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+
+            // Error handling for quantity
+            if (quantity < minOrder) {
+                document.getElementById('quantity-error').textContent = `Minimum order is ${minOrder} units.`;
+                document.getElementById('quantity-error').style.display = 'block';
+                return;
+            } else if (quantity > productStock) {
+                document.getElementById('quantity-error').textContent = `Only ${productStock} units available in stock.`;
+                document.getElementById('quantity-error').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('quantity-error').style.display = 'none'; // Hide error message
+            }
+
+            // WhatsApp number with country code
+            const whatsappNumber = "+94785822315"; // Your WhatsApp number with country code
+            const message = `*New Order*\nShop Name: ${shopName}\nAddress: ${address}\nProduct: ${productName}\nQuantity: ${quantity}\nTotal Price: LKR ${productPrice * quantity}`;
+            const whatsappLink = `https://wa.me/${whatsappNumber.replace("+", "")}?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappLink, '_blank'); // Open WhatsApp chat
+            closeCheckoutModal(); // Close modal after submission
+        }
+
+        // Load the product details when the page is loaded
+        window.onload = loadProductDetails;
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "name": "පොල්",
+        "price": 95,
+        "description": "Coconut",
+        "image": "https://shorturl.at/NGBrn",
+        "stock": 100,
+        "minOrder": 50
+    },
+    {
+        "id": 1,
+        "name": "ගොටුකොළ",
+        "price": 65,
+        "description": "vallari keerai",
+        "image": "https://shorturl.at/gR0so",
+        "stock": 0,
+        "minOrder": 1
+    },
+    {
+        "id": 2,
+        "name": "කජු",
+        "price": 260,
+        "description": "Cashew Nuts 100g",
+        "image": "https://shorturl.at/UbEe1",
+        "stock": 0,
+        "minOrder": 2
+    },
+    {
+        "id": 3,
+        "name": "Duriyan",
+        "price": 750,
+        "description": "Duriyan",
+        "image": "https://shorturl.at/vV3fU",
+        "stock": 0,
+        "minOrder": 1
+    }
+]
